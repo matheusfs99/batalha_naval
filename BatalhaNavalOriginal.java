@@ -75,7 +75,7 @@ public class BatalhaNavalOriginal {
         posicao[0][2] = 7;
         posicao[0][3] = 7;
         posicao[0][4] = 7;
-        
+
     }
 
     public static int lerLinha() {
@@ -93,6 +93,16 @@ public class BatalhaNavalOriginal {
         } catch (Exception e) {
             System.out.println("Linha inexistente!!!");
             return (lerLinha());
+        } finally {
+            String arq = "log.txt";
+
+            String log = "Coluna: " + Linha;
+
+            if (Arquivo.Write(arq, log)) {
+                System.out.println("Arquivo salvo com sucesso!");
+            } else {
+                System.out.println("Erro ao salvar o arquivo!");
+            }
         }
     }
 
@@ -112,6 +122,17 @@ public class BatalhaNavalOriginal {
         } catch (Exception e) {
             System.out.println("Coluna inexistente!!!");
             return (lerColuna());
+        } finally {
+            String arq = "log.txt";
+
+            String log = "Coluna: " + Coluna;
+
+            if (Arquivo.Write(arq, log)) {
+                System.out.println("Arquivo salvo com sucesso!");
+            } else {
+                System.out.println("Erro ao salvar o arquivo!");
+            }
+
         }
 
     }
@@ -127,10 +148,10 @@ public class BatalhaNavalOriginal {
     public static void imprimeTabuleiro() {
         System.out.println("    0   1   2   3   4   5   6   7   8   9"); //numero da coluna
         System.out.println("-------------------------------------------");
-        for(int l=0;l<10;l++){//preenche as linhas com elementos de 0 a 7//
+        for (int l = 0; l < 10; l++) {//preenche as linhas com elementos de 0 a 7//
             System.out.print(l + " ");   //numero da linhas do lado do tabuleiro
-            for(int c=0;c<10;c++){//preenche as colunas com elementos de 0 a 7//
-                System.out.print("| "+tabuleiro[l][c]+" ");
+            for (int c = 0; c < 10; c++) {//preenche as colunas com elementos de 0 a 7//
+                System.out.print("| " + tabuleiro[l][c] + " ");
             }
             System.out.println("|");
             System.out.println("--------------------------------------------");
@@ -178,7 +199,7 @@ public class BatalhaNavalOriginal {
                         cruzador--; //diminui uma unidade de cruzador
                         imprimeTabuleiro();
                         break;
-                    
+
                     case 7:
                         System.out.println("voce acertou um porta-avioes");
                         tabuleiro[lin][col] = "P";
@@ -205,30 +226,14 @@ public class BatalhaNavalOriginal {
         posicaoDosCruzadores();
         posicaoDoPortaAviao();
 
-
         inicilizaMatriz();
         imprimeTabuleiro();
 
-
-     linha = lerLinha();
-     coluna = lerColuna();
+        linha = lerLinha();
+        coluna = lerColuna();
 
         verificaPosicao();
-
-        
-        String arq = "log.txt";
-        
-
-        String log ="Linha: "+linha+"| Coluna: "+coluna;
-        
-        if(Arquivo.Write(arq, log))
-            System.out.println("Arquivo salvo com sucesso!");
-        else
-            System.out.println("Erro ao salvar o arquivo!");
-        
-        
         System.out.println("Parabéns você ganhou");
-
     }
 
 }
